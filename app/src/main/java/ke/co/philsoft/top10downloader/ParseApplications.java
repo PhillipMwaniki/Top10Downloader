@@ -81,11 +81,11 @@ public class ParseApplications {
                 Log.d(TAG, "*****************************");
                 Log.d(TAG, app.toString());
             }
-            return true;
         }catch (Exception e) {
             status = false;
             e.printStackTrace();
-            return false;
         }
+
+        return status;
     }
 }
