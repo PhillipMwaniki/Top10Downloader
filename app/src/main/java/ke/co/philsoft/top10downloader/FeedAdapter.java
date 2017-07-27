@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,11 +40,13 @@ public class FeedAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
+            Log.d(TAG, "getView: Caled with null convert view");
             convertView = layoutInflater.inflate(layoutResource, parent, false);
 
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
+            Log.d(TAG, "getView: Provider a convert view");
             viewHolder = (ViewHolder) convertView.getTag();
         }
         TextView tvName = convertView.findViewById(R.id.tvName);
