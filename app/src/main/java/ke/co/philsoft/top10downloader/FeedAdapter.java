@@ -17,7 +17,7 @@ import java.util.List;
  * Created by mwani on 25-Jul-17.
  */
 
-public class FeedAdapter extends ArrayAdapter {
+public class FeedAdapter<T extends FeedEntry> extends ArrayAdapter {
     private static final String TAG = "FeedAdapter";
     private final int layoutResource;
     private final LayoutInflater layoutInflater;
