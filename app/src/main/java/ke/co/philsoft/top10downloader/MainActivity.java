@@ -37,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.d(TAG, "doInBackground: starts with " + strings[0]);
+//            Log.d(TAG, "doInBackground: starts with " + strings[0]);
             String rssFeed = downloadXML(strings[0]);
-            if (rssFeed ==null) {
+            if (rssFeed == null) {
                 Log.e(TAG, "doInBackground: Error downloading");
             }
             return rssFeed;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             StringBuilder xmlResult = new StringBuilder();
             try {
                 URL url = new URL(urlPath);
-                HttpURLConnection  connection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 int response = connection.getResponseCode();
                 Log.d(TAG, "downloadXML: Response code was " + response);
 //                InputStream inputStream = connection.getInputStream();
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                 int charsRead;
                 char[] inputBuffer = new char[500];
-                while(true) {
+                while (true) {
                     charsRead = reader.read(inputBuffer);
                     if (charsRead < 0) {
                         break;
@@ -75,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "downloadXML: Invalid URL " + e.getMessage());
                 e.printStackTrace();
             } catch (IOException e) {
-                Log.e(TAG, "downloadXML: IO Exception reading data: "+ e.getMessage());
+                Log.e(TAG, "downloadXML: IO Exception reading data: " + e.getMessage());
                 e.printStackTrace();
-            }catch (SecurityException e) {
+            } catch (SecurityException e) {
                 Log.e(TAG, "downloadXML: Security exception" + e.getMessage());
             }
             return null;
@@ -90,9 +90,11 @@ public class MainActivity extends AppCompatActivity {
             ParseApplications parseApplications = new ParseApplications();
             parseApplications.parse(s);
 
-            ArrayAdapter<FeedEntry> arrayAdapter = new ArrayAdapter<>(
-                    MainActivity.this, R.layout.list_item, parseApplications.getApplications());
-            listApps.setAdapter(arrayAdapter);
+//            ArrayAdapter<FeedEntry> arrayAdapter = new ArrayAdapter<>(
+//                    MainActivity.this, R.layout.list_item, parseApplications.getApplications());
+//            listApps.setAdapter(arrayAdapter);
+            FeedAdapter feedAdapter = new FeedAdapter(MainActivity.this, R.layout.list_record, parseApplications.getApplications());
+            listApps.setAdapter(feedAdapter);
         }
     }
 }
